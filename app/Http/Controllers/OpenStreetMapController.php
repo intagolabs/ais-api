@@ -14,7 +14,13 @@ class OpenStreetMapController extends Controller
         if(isset($location->address) && isset($location->address->municipality)) {
             return $location->address->municipality;
         }
-        return 'Unknown';
+        elseif(isset($location->address) && isset($location->address->city)) {
+            return $location->address->city;
+        }
+        elseif(isset($location->address) && isset($location->address->state)) {
+            return $location->address->state;
+        }
+        return 'Onbekend';
 
     }
 
