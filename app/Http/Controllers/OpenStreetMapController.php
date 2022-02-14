@@ -11,7 +11,7 @@ class OpenStreetMapController extends Controller
 {
     public static function fetchLocation(Ais $ais) {
         $location = OpenStreetMapController::reverse($ais->longitude,$ais->latitude);
-        if(isset($location->address)) {
+        if(isset($location->address) && $location->address->municipality) {
             return $location->address->municipality;
         }
         return 'Unknown';
