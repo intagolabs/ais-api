@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 class OpenStreetMapController extends Controller
 {
     public static function fetchLocation(Ais $ais) {
-        return OpenStreetMapController::reverse($ais->longitude,$ais->latitude)->name;
+        return OpenStreetMapController::reverse($ais->longitude,$ais->latitude)->address->municipality;
     }
 
     public static function fetchAddress(Ais $ais) {
