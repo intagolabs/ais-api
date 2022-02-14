@@ -23,15 +23,17 @@ class AISHubController extends Controller
     }
 
     public function fetch() {
-        echo $this->host.$this->getParameters();
+        echo "Download the latest ais.json version ".$this->host.$this->getParameters()."/r/n";
         $data = file_get_contents($this->host.$this->getParameters());
         Storage::put('ais.json',$data);
     }
 
     public function process() {
+        echo "Open the AIS File/r/n";
         $ais_raw = json_decode(Storage::get('ais.json'));
 
         foreach ($ais_raw[1] as $ais_record) {
+            echo "Import ".$ais_record->MMSI."/r/n";
             Ais::updateOrCreate([
                 'mmsi'=>$ais_record->MMSI,
                 'imo'=>$ais_record->IMO,
@@ -41,5 +43,6 @@ class AISHubController extends Controller
                 'navstat'=>$ais_record->NAVSTAT,
             ]);
         }
+        echo "AIS Import Finished/r/n";
     }
 }
