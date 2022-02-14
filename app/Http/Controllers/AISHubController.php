@@ -39,7 +39,7 @@ class AISHubController extends Controller
                 'imo'=>$ais_record->IMO,
                 'name'=>$ais_record->NAME,
                 'latitude'=>$ais_record->LATITUDE,
-                'longitude'=>$ais_record->LATITUDE,
+                'longitude'=>$ais_record->LONGITUDE,
                 'navstat'=>$ais_record->NAVSTAT,
             ]);
         }
