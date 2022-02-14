@@ -40,5 +40,6 @@ class AishubFetch extends Command
     {
         $aishub = new AISHubController();
         $aishub->fetch();
+        $aishub->process();
     }
 }

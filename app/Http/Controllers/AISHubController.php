@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ais;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,18 +29,17 @@ class AISHubController extends Controller
     }
 
     public function process() {
-        $ais_data = json_decode(Storage::get('ais.json'));
-        /*foreach ($ais_data[1] as $ais) {
-            if(intval($ais->MMSI) === intval($contact->mmsi)) {
-                $contact->ais_latitude = $ais->LATITUDE;
-                $contact->ais_longitude = $ais->LONGITUDE;
-                $contact->ais_datetime = date('Y-m-d H:i:s');
-                $contact->ais_destination = $ais->DEST;
-                $contact->ais_current_location = $ais->DEST;
-                $contact->ais_is_sailing = (intval($ais->NAVSTAT) === 0);
-                $contact->save();
-                echo $contact->mmsi." = ".$ais->DEST."/r/n";
-            }
-        }*/
+        $ais_raw = json_decode(Storage::get('ais.json'));
+
+        foreach ($ais_raw[1] as $ais_record) {
+            Ais::updateOrCreate([
+                'mmsi'=>$ais_record->MMSI,
+                'imo'=>$ais_record->IMO,
+                'name'=>$ais_record->NAME,
+                'latitude'=>$ais_record->LATITUDE,
+                'longitude'=>$ais_record->LATITUDE,
+                'navstat'=>$ais_record->NAVSTAT,
+            ]);
+        }
     }
 }
