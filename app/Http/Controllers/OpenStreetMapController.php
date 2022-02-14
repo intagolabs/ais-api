@@ -10,11 +10,20 @@ use Illuminate\Support\Facades\Cache;
 class OpenStreetMapController extends Controller
 {
     public static function fetchLocation(Ais $ais) {
-        return OpenStreetMapController::reverse($ais->longitude,$ais->latitude)->address->municipality;
+        $location = OpenStreetMapController::reverse($ais->longitude,$ais->latitude);
+        if(isset($location->address)) {
+            return $location->address->municipality;
+        }
+        return 'Unknown';
+
     }
 
     public static function fetchAddress(Ais $ais) {
-        return OpenStreetMapController::reverse($ais->longitude,$ais->latitude)->address;
+        $location = OpenStreetMapController::reverse($ais->longitude,$ais->latitude);
+        if(isset($location->address)) {
+            return $location->address;
+        }
+        return 'Unknown';
     }
 
     public static function reverse($longitude,$latitude) {
