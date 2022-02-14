@@ -36,6 +36,8 @@ class AISHubController extends Controller
             echo "Import ".$ais_record->MMSI."/r/n";
             Ais::updateOrCreate([
                 'mmsi'=>$ais_record->MMSI,
+            ],
+            [
                 'imo'=>$ais_record->IMO,
                 'name'=>$ais_record->NAME,
                 'latitude'=>$ais_record->LATITUDE,
