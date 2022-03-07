@@ -43,6 +43,7 @@ class AISHubController extends Controller
                 'latitude'=>$ais_record->LATITUDE,
                 'longitude'=>$ais_record->LONGITUDE,
                 'navstat'=>$ais_record->NAVSTAT,
+                'callsign'=>$ais_record->CALLSIGN,
             ]);
         }
         echo "AIS Import Finished/r/n";

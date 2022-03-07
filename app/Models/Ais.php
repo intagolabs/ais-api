@@ -13,7 +13,7 @@ class Ais extends Model
     protected $primaryKey = 'mmsi';
 
     protected $fillable = [
-        'mmsi','imo','name','latitude','longitude','navstat','location','address'
+        'mmsi','imo','name','latitude','longitude','navstat','location','address','callsign'
     ];
 
     public function getLocationAttribute() {
